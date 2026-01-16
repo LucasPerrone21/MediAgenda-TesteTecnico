@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma.db"
+  moduleFormat    = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+// Database schema
+
+model MedicalProfessional {
+  id        Int      @id @default(autoincrement())
+  name      String   
+  crm       String   @unique
+  specialty Specialty
+  appointments MedicalAppointment[]
+}
+
+model MedicalAppointment {
+  id                    Int                 @id @default(autoincrement())
+  appointmentDate       DateTime
+  patientName           String
+  medicalProfessionalId Int
+  medicalProfessional   MedicalProfessional @relation(fields: [medicalProfessionalId], references: [id])
+}
+
+enum Specialty {
+  CARDIOLOGY
+  DERMATOLOGY
+  PEDIATRICS
+  ORTHOPEDICS
+  NEUROLOGY
+}
+
