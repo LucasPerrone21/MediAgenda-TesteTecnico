@@ -1,5 +1,6 @@
 'use client';
 
+import { getApiUrl } from '@/app/utils';
 import { useEffect, useState } from 'react';
 import { DoctorItem } from '../doctortItem';
 import { CreateDoctorModal } from '../doctorsModal';
@@ -16,7 +17,7 @@ export function DoctorsList() {
   const [modalOpen, setModalOpen] = useState(false);
 
   async function fetchDoctors() {
-    const res = await fetch(`http://localhost:3000/medical-professional`);
+    const res = await fetch(`${getApiUrl()}/medical-professional`);
     const data = await res.json();
     setDoctors(data);
   }

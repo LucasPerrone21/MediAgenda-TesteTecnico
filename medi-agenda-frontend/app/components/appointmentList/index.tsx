@@ -1,5 +1,5 @@
 'use client';
-
+import { getApiUrl } from '@/app/utils';
 import { useEffect, useState } from 'react';
 import { AppointmentItem } from '../appointmentsItem';
 import { CreateAppointmentModal } from '../appointmentModal';
@@ -21,7 +21,7 @@ export function AppointmentsList() {
   const [modalOpen, setModalOpen] = useState(false);
 
   async function fetchAppointments() {
-    const res = await fetch(`http://localhost:3000/medical-appointment`);
+    const res = await fetch(`${getApiUrl()}/medical-appointment`);
     const data = await res.json();
     const formattedData = data.map((appointment: Appointment) => ({
         ...appointment,

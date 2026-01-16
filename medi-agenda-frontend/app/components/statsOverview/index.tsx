@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { StatsCard } from '../statsCard';
+import { getApiUrl } from '@/app/utils';
 
 type StatsData = {
   doctors: number;
@@ -17,8 +18,8 @@ export function StatsOverview() {
     async function fetchStats() {
       try {
         const [responseDoctors, responseAppointmants] = await Promise.all([
-          fetch('http://localhost:3000/medical-professional'),
-          fetch('http://localhost:3000/medical-appointment'),
+          fetch(`${getApiUrl()}/medical-professional`),
+          fetch(`${getApiUrl()}/medical-appointment`),
         ]);
 
         if (!responseDoctors.ok || !responseAppointmants.ok) {

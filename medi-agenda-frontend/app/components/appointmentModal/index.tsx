@@ -1,5 +1,6 @@
 'use client';
 
+import { getApiUrl } from '@/app/utils';
 import { useEffect, useState } from 'react';
 
 type Doctor = {
@@ -23,7 +24,7 @@ export function CreateAppointmentModal({ isOpen, onClose, onCreated }: Props) {
   useEffect(() => {
     if (!isOpen) return;
 
-    fetch(`http://localhost:3000/medical-professional`)
+    fetch(`${getApiUrl()}/medical-professional`)
       .then(res => res.json())
       .then(setDoctors);
   }, [isOpen]);
@@ -32,7 +33,7 @@ export function CreateAppointmentModal({ isOpen, onClose, onCreated }: Props) {
     e.preventDefault();
     setLoading(true);
 
-    await fetch(`http://localhost:3000/medical-appointment`, {
+    await fetch(`${getApiUrl()}/medical-appointment`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

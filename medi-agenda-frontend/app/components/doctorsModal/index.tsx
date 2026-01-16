@@ -1,5 +1,6 @@
 'use client';
 
+import { getApiUrl } from '@/app/utils';
 import { useEffect, useState } from 'react';
 
 
@@ -19,7 +20,7 @@ export function CreateDoctorModal({ isOpen, onClose, onCreated }: Props) {
 useEffect(() => {
     if (!isOpen) return;
 
-    fetch(`http://localhost:3000/medical-professional/specialties`)
+    fetch(`${getApiUrl()}/medical-professional/specialties`)
         .then(res => res.json())
         .then(data => setSpecialties(data));
 }, [isOpen]);
@@ -28,7 +29,7 @@ useEffect(() => {
     e.preventDefault();
     setLoading(true);
 
-    await fetch(`http://localhost:3000/medical-professional`, {
+    await fetch(`${getApiUrl()}/medical-professional`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
